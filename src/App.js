@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { ToastContainer, toast } from 'react-toastify';
+import * as Sentry from '@sentry/react';
 import http from './services/httpService'
 import config from './config.json';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,7 +11,7 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const { data: posts } = await http.get('s' + config.apiEndPoint);
+    const { data: posts } = await http.get(config.apiEndPoint);
     this.setState({ posts });
   }
 
@@ -54,6 +55,12 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
+      <Sentry.ErrorBoundary
+        beforeCapture={(scope) => {
+          scope.setTag("location", "first");
+          scope.setTag("anotherTag", "anotherValue");
+        }}
+      >
         <ToastContainer />
         <button className="btn btn-primary" onClick={this.handleAdd}>
           Add
@@ -90,6 +97,7 @@ class App extends Component {
             ))}
           </tbody>
         </table>
+        </Sentry.ErrorBoundary>
       </React.Fragment>
     );
   }

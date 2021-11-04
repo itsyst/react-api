@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import reportWebVitals from './reportWebVitals';
 
 Sentry.init({
-  dsn: "https://a868f388cd06421fa99c8d00bc9cb130@o408400.ingest.sentry.io/6049313",
+  dsn: "https://33d5d43f47804a04bae0915a43580478@o408400.ingest.sentry.io/6049867",
   integrations: [new Integrations.BrowserTracing()],
 
   // Set tracesSampleRate to 1.0 to capture 100%
@@ -18,9 +18,7 @@ Sentry.init({
 
 ReactDOM.render(
   <React.StrictMode>
-    <Sentry.ErrorBoundary fallback={<p>An error has occurred</p>}>
-      <App />
-    </Sentry.ErrorBoundary>;
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
