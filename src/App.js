@@ -10,7 +10,7 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const { data: posts } = await http.get(config.apiEndPoint);
+    const { data: posts } = await http.get('s' + config.apiEndPoint);
     this.setState({ posts });
   }
 
